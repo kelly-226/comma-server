@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -8,13 +10,17 @@ import { UserModule } from './user/user.module';
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: 'kelly_admin',
-      password: 'kelly_admin',
-      database: 'kelly',
+      username: 'kelly',
+      password: 'kelly226',
+      database: 'comma',
       autoLoadEntities: true,
       synchronize: true,
     }),
+    ConfigModule.forRoot({
+      envFilePath: '.env.local',
+    }),
+    AuthModule,
     UserModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
